@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín 💖</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffccdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: 2px solid red;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: white;
+            color: red;
+        }
+        #yes {
+            background-color: white;
+            color: red;
+        }
+        #no {
+            background-color: white;
+            color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="message" id="question">Hola mi bella hermosa 💖</div>
+    <div class="buttons">
+        <button id="next" onclick="nextMessage()">Siguiente</button>
+    </div>
+
+    <script>
+        let step = 0;
+        function nextMessage() {
+            let question = document.getElementById('question');
+            let nextButton = document.getElementById('next');
+            
+            const messages = [
+                "Mi potito hermosho 💖",
+                "¿Sabías que eres el amor de mi vida? 💕",
+                "Porque realmente haces mis días increíbles y no sabes cuánto aprecio tenerte a mi lado 🥰",
+                "Ahoraaaa necesito que me prestes atención porque lo que viene es muuuuuuuy importante y muuuy confidencial 👀",
+                "Your mission, should you choose to accept it, is to be my Valentines forever and ever.... es por esto quee.. 💘"
+            ];
+            
+            if (step < messages.length) {
+                question.innerHTML = messages[step];
+                step++;
+            } else if (step === messages.length) {
+                question.innerHTML = "Mi niña hermosaa ¿Quiere ser mi San Valentín? 💖";
+                document.querySelector('.buttons').innerHTML = `
+                    <button id="yes" onclick="sayYes()">Sí</button>
+                    <button id="no" onmouseover="moveNo()">No</button>
+                `;
+            }
+        }
+
+        function sayYes() {
+            document.getElementById('question').innerHTML = "¡QUE YYICOOO TINGO YA QUIERO VERLAAAA Y QUE ESTE ACA CONMIGO PARA CELEBRAAAR! 💘 This message will self-destruct in 5 seconds 💕";
+            document.querySelector('.buttons').style.display = 'none';
+            
+            setTimeout(() => {
+                document.body.innerHTML = "<h1 style='text-align: center; color: white;'>¡La misión ha sido aceptada! 💘</h1>";
+            }, 5000);
+        }
+
+        function moveNo() {
+            let button = document.getElementById('no');
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
